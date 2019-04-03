@@ -15,7 +15,8 @@ var Book = require('./models/book')
 var Author = require('./models/author')
 var Genre = require('./models/genre')
 var BookInstance = require('./models/bookinstance')
-
+var Editorial = require('./models/editorial')
+var Comprador = require('./models/comprador')
 
 var mongoose = require('mongoose');
 var mongoDB = userArgs[0];
@@ -28,6 +29,9 @@ var authors = []
 var genres = []
 var books = []
 var bookinstances = []
+var editorial = []
+var comprador = []
+
 
 function authorCreate(first_name, family_name, d_birth, d_death, cb) {
   authordetail = {first_name:first_name , family_name: family_name }
