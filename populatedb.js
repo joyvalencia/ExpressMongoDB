@@ -86,6 +86,28 @@ function bookCreate(title, summary, isbn, author, genre, cb) {
   }  );
 }
 
+//AFEGINT EDITORIAL CREATE
+function editorialCreate(nomeditorial, anyedicio, pais) {
+  bookdetail = { 
+    nomeditorial: nomEditorial,
+    anyedicion: anyedicio,
+    pais: pais
+  }
+  if (genre != false) bookdetail.genre = genre
+    
+  var book = new Book(bookdetail);    
+  book.save(function (err) {
+    if (err) {
+      cb(err, null)
+      return
+    }
+    console.log('New Editorial: ' + editor);
+    books.push(book)
+    cb(null, book)
+  }  );
+}
+
+
 
 function bookInstanceCreate(book, imprint, due_back, status, cb) {
   bookinstancedetail = { 
@@ -212,10 +234,41 @@ function createBookInstances(cb) {
 
 
 
+
+//CREACIÓ DE EDITORIALS
+
+function createEditorials(cb) {
+    async.series([
+        function(callback) {
+          editorialCreate('Juventud', '1923', '951265478', 'España', callback);
+        },
+        function(callback) {
+          editorialCreate('edebé', '1888', '956256387', 'España', callback);
+        },
+        function(callback) {
+          editorialCreate('Santillana', '1959', '965835654', 'España', callback);
+        },
+        function(callback) {
+          editorialCreate('Salvat', '1869', '968591124', 'España', callback);
+        },
+        function(callback) {
+          editorialCreate('Planeta', '1949', '986756676', 'España', callback);
+        },
+        function(callback) {
+          editorialCreate('Alfaguara', '1964', '957878862', 'España', callback);
+        },        
+        ],
+        // optional callback
+        cb);
+}
+
+
+
 async.series([
     createGenreAuthors,
     createBooks,
-    createBookInstances
+    createBookInstances,
+    createEditorials
 ],
 // Optional callback
 function(err, results) {
